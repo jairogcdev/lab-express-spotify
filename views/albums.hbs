@@ -1,0 +1,13 @@
+<div>
+  {{#each dataAlbums}}
+    <p>{{this.name}}</p>
+    {{#each this.images}}
+      {{#if this.height}}
+        <img src="{{this.url}}" alt="image" />
+      {{/if}}
+    {{/each}}
+    <button><a href="/tracks/{{this.id}}">View tracks</a>
+    </button>
+  {{/each}}
+  <button><a href="/">Go home</a></button>
+</div>

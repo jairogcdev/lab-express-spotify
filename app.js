@@ -1,18 +1,25 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
-const hbs = require('hbs');
-
-// require spotify-web-api-node package here:
+const express = require("express");
+const hbs = require("hbs");
 
 const app = express();
+const router = express.Router();
 
-app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
+app.set("view engine", "hbs");
+app.set("views", __dirname + "/views");
+app.use(express.static(__dirname + "/public"));
+app.use(express.json());
+// default value for title local
+const projectName = "Ironhack Spotify";
 
-// setting the spotify-api goes here:
+app.locals.appTitle = `${projectName} created with IronLauncher`;
 
-// Our routes go here:
+const indexRouter = require("./routes/index.routes.js");
+app.use("/", indexRouter);
 
-app.listen(3000, () => console.log('My Spotify project running on port 3000 🎧 🥁 🎸 🔊'));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () =>
+  console.log(`My Spotify project running on port ${PORT} 🎧 🥁 🎸 🔊`)
+);
